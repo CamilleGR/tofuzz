@@ -94,5 +94,5 @@ Execution time : 0.17 seconds
 
 To use this fuzzer with tor : 
 - Start Tor Browser with the proxy 
-- Add the arguments to commandline 
+- Add the arguments to commandline `--tor`  
 - start the fuzzing
