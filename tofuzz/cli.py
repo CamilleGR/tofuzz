@@ -22,14 +22,14 @@ def fuzz_res(p, res, verbose=False) :
 
 
 # Thread main : fuzz 
-def fuzz(method, url, headers, body, wordlist, fuzz_body=False, fuzz_query=False, torConfig=None, fuzzToken=""):
+def fuzz(args, wordlist, fuzz_body=False, fuzz_query=False, torConfig=None):
     for w in wordlist : 
-        req = fuzzed_request(method,url, headers=headers, body=body, FUZZ_TOKEN =fuzzToken, torConfig=torConfig)
+        req = fuzzed_request(args.method,args.url, headers=args.headers, body=args.body, FUZZ_TOKEN =args.fuzzToken, torConfig=torConfig)
         if fuzz_body : 
             req.fuzz_body(w) 
         if fuzz_query : 
             req.fuzz_query(w)
-        print(fuzz_res(w, req.execute(), False))
+        print(fuzz_res(w, req.execute(), args.verbose))
 
 def cli() : 
     # Parsing args
@@ -51,12 +51,11 @@ def cli() :
     for w in wordlist : 
         # Creating threads
         t = threading.Thread(target=fuzz, 
-        args=(args.method ,args.url ,args.headers ,args.body ,), 
+        args=(args, ), 
         kwargs={"wordlist":w,
         "fuzz_body": FUZZ_BODY , 
         "fuzz_query":FUZZ_QUERY,
-        "torConfig": torConfig,
-        "fuzzToken": args.fuzzToken
+        "torConfig": torConfig
         })
         threads.append(t)
 
