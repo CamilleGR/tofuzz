@@ -1,8 +1,7 @@
 
-![Logo of ToFu](static/tofuzz-banner.png)
+<img src="static/tofuzz-transparent-banner.png" height="350px"/>
 
 
-# ToFuzz
 
 ToFuzz is an opensource Fuzzing tool able to use the tor network to limit the footprint on the targetted server and escape the attack detection by IP Filter.
 
